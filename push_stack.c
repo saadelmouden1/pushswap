@@ -2,7 +2,7 @@
 
 void push_stack(t_stack_lst_node **dest, t_stack_lst_node **src)
 {
-    printf("ff");
+//  printf("ff");
     t_stack_lst_node	*node_to_push;
 
 	if (NULL == *src || src == NULL)
@@ -24,5 +24,5 @@ void push_stack(t_stack_lst_node **dest, t_stack_lst_node **src)
 		node_to_push->next->prev = node_to_push;
 		*dest = node_to_push;
 	}
-     printf("j");
+  // printf("j");
 }

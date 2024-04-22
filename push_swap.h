@@ -26,7 +26,7 @@ t_stack_lst_node *find_last_node(t_stack_lst_node *first_element);
 
 void add_element(t_stack_lst_node **stack, int value);
 void sort_three(t_stack_lst_node **stack);
-void sort_five(t_stack_lst_node **stack_a, t_stack_lst_node **stack_b);
+void push_swap(t_stack_lst_node **stack_a, t_stack_lst_node **stack_b);
 
 void retate(t_stack_lst_node **stack);
 
