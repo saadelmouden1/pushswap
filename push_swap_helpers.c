@@ -40,3 +40,16 @@ t_stack_lst_node *find_last_node(t_stack_lst_node *first_element)
     return(first_element);
 
 }
+
+bool is_sorted(t_stack_lst_node *list)
+{
+	if(list == NULL)
+		return (1);
+	while(list->next != NULL)
+	{
+		if(list->value > list->next->value)
+			return (false);
+		list = list->next;
+	}
+	return (true);
+}

@@ -238,17 +238,28 @@ void move_nodes(t_stack_lst_node **a,t_stack_lst_node **b)
 		&& node_to_move->place_node->before_middle)
 	{
 		//printf("hh\n");
+		while(*a != node_to_move->place_node && *b != node_to_move)
+		{
 		retate(a);
 		retate(b);
 		write(1,"rr\n",3);
+		}
+		get_update_pos(*a);
+		get_update_pos(*b);
 	}
 	else if(!(node_to_move->before_middle)
 		&& !(node_to_move->place_node->before_middle))
 	{
 		//printf("ff\n");
+		while( *a != node_to_move->place_node && *b != node_to_move) 
+		{	
 		reverse_retate(a);
 		reverse_retate(b);
 		write(1,"rrr\n",4);
+		}
+		get_update_pos(*a);
+		get_update_pos(*b);
+		//write(1,"rrr\n",4);
 	}
 	final_steps(b,node_to_move,'b');
 	final_steps(a,node_to_move->place_node,'a');
@@ -313,12 +324,20 @@ void push_swap(t_stack_lst_node **stack_a, t_stack_lst_node **stack_b)
 
 
 
-int main()
+
+/*
+int main(int argc,char **argv)
 {
     t_stack_lst_node *a;
      t_stack_lst_node *b;
     a = NULL;
         b = NULL;
+	if (1 == argc || (2 == argc && !argv[1][0]))
+				return (1);
+		else if (2 == argc)
+					argv = ft_split(argv[1], ' ');
+			stack_init(&a, argv + 1);
+	push_swap(&a,&b);
 
     add_element(&a,8);
 
@@ -346,7 +365,8 @@ int main()
         a = a->next;
     }
 printf("*****\n");
-/* 
+
+ 
  while(b != NULL)
     {
         printf("value :%d, pos: %d ,moves: %d, before_middle :%d,plmpos :%d, small:%d\n",b->value,b->pos,b->moves, b->before_middle, b->place_node->pos, b->small_n_moves);
@@ -358,5 +378,7 @@ printf("*****\n");
       
       t_stack_lst_node *d = get_smallest_moves_nd(b);
       printf("%d\n",d->value);
- */
+ 
 }
+*/
+

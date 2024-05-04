@@ -33,3 +33,11 @@ void retate(t_stack_lst_node **stack);
 void reverse_retate(t_stack_lst_node **stack);
 
 void swap(t_stack_lst_node **stack);
+void	stack_init(t_stack_lst_node **a, char **argv, int ac);
+char	**ft_split(const char *s, char c);
+bool is_sorted(t_stack_lst_node *list);
+void stack_freeing(t_stack_lst_node **list);
+int is_repet(t_stack_lst_node *a, int n);
+int check_syntax(char *str);
+void free_array(char **str);
+void clean_mmr(t_stack_lst_node **a, char **av, int ac);
