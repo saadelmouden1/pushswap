@@ -1,61 +1,80 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_init.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sel-moud <sel-moud@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/07 02:42:42 by sel-moud          #+#    #+#             */
+/*   Updated: 2024/05/08 00:47:03 by sel-moud         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 #include <limits.h>
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 
-/*
- *  *  atol, i need it to check eventual overflows
- *   *  converting every string into a long value
- *   */
-
-static int ft_atoi(char *str)
+static long	ft_atoi(char *str)
 {
-	int i = 0;
-	int num = 0;
-	int sign = 1;
-	while(str[i] && (str[i] == 32 || (str[i] >= 9 && str[i] <= 13)))
+	int	i;
+	long	num;
+	int	sign;
+
+	i = 0;
+	num = 0;
+	sign = 1;
+	while (str[i] && (str[i] == 32 || (str[i] >= 9 && str[i] <= 13)))
 		i++;
-	if(str[i] == '+')
+	if (str[i] == '+')
 		i++;
-	else if(str[i] == '-')
+	else if (str[i] == '-')
 	{
 		sign *= -1;
 		i++;
 	}
-	while(str[i] >= '0' && str[i] <= '9')
+	while (str[i] >= '0' && str[i] <= '9')
 	{
 		num = num * 10 + (str[i] - '0');
-
 		i++;
 	}
-	return (num  * sign);
-
+	return (num * sign);
 }
 
-
-void stack_init(t_stack_lst_node **a,char **argv,int c)
+int ft_strlen(char *str)
+{
+	int i = 0;
+	while(str[i])
+	{
+		i++;
+	}
+	return (i);
+}
+void	stack_init(t_stack_lst_node **a, char **argv, int c)
 {
 	long	nbr;
 	int		i;
+	char **v;
 
 	i = 0;
 	while (argv[i] != NULL)
 	{
-		if(check_syntax(argv[i]) == 1)
-			clean_mmr(a,argv,c);
-	//	printf("aa\n");
-		nbr = ft_atoi(argv[i]);
-		if(nbr > INT_MAX || nbr < INT_MIN)
-			clean_mmr(a, argv, c);
-		if(is_repet(*a, (int)nbr))
-			clean_mmr(a,argv, c);
-			
-		add_element(a,nbr);
+		v = ft_split(argv[i] , ' ');
+		if(v[0]== NULL)
+				clean_mmr(a, v, c);
+		int n= 0;
+		while(v[n]!= NULL)
+		{
+			if (check_syntax(v[n]) == 1)
+				clean_mmr(a, v, c);
+			nbr = ft_atoi(v[n]);
+			if ((nbr > INT_MAX || nbr < INT_MIN) || is_repet(*a, (int)nbr) )
+				clean_mmr(a, v, c);
+			add_element(a, nbr);
+			++n;
+		}
+		if(v)
+				free_array(v);
 		++i;
 	}
-
-	if(c== 2)
-		free_array(argv);
-
-
 }
