@@ -6,7 +6,7 @@
 /*   By: sel-moud <sel-moud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 02:42:59 by sel-moud          #+#    #+#             */
-/*   Updated: 2024/05/08 00:49:34 by sel-moud         ###   ########.fr       */
+/*   Updated: 2024/05/09 00:50:38 by sel-moud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,26 +24,24 @@ static void	handle_sort(t_stack_lst_node **a, t_stack_lst_node **b)
 	else
 		push_swap(a, b);
 }
-void f(void){
-	system("leaks push_swap");
-	} 
+
 int	main(int argc, char **argv)
 {
-	atexit(f);
 	t_stack_lst_node	*a;
 	t_stack_lst_node	*b;
 	char				**av;
 
 	a = NULL;
 	b = NULL;
-	if (1 == argc || (2 == argc && !argv[1][0]))
+	if (argc == 1)
+		return (1);
+	if (2 == argc && !argv[1][0])
 	{
-		write(2,"Error\n",6);
+		write(2, "Error\n", 6);
 		return (1);
 	}
-		av = argv;
-	stack_init(&a, av + 1, argc == 2);
-	
+	av = argv;
+	stack_init(&a, av + 1);
 	if (!is_sorted(a))
 	{
 		handle_sort(&a, &b);

@@ -6,7 +6,7 @@
 /*   By: sel-moud <sel-moud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 02:43:30 by sel-moud          #+#    #+#             */
-/*   Updated: 2024/05/08 00:48:43 by sel-moud         ###   ########.fr       */
+/*   Updated: 2024/05/09 01:51:33 by sel-moud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void	swap(t_stack_lst_node **stack)
 
 	if (stack == NULL || *stack == NULL || (*stack)->next == NULL)
 	{
-		printf("jj");
 		return ;
 	}
 	nd = *stack;
@@ -31,6 +30,18 @@ void	swap(t_stack_lst_node **stack)
 		nd->next->prev = nd;
 }
 
+static void	retate_a(t_stack_lst_node **stack)
+{
+	retate(stack);
+	write(1, "ra\n", 3);
+}
+
+static void	retate_b(t_stack_lst_node **stack)
+{
+	retate(stack);
+	write(1, "rb\n", 3);
+}
+
 void	final_steps(t_stack_lst_node **stack, t_stack_lst_node *top_node,
 		char nm_stack)
 {
@@ -39,10 +50,7 @@ void	final_steps(t_stack_lst_node **stack, t_stack_lst_node *top_node,
 		if (nm_stack == 'a')
 		{
 			if (top_node->before_middle)
-			{
-				retate(stack);
-				write(1, "ra\n", 3);
-			}
+				retate_a(stack);
 			else
 			{
 				reverse_retate(stack);
@@ -52,10 +60,7 @@ void	final_steps(t_stack_lst_node **stack, t_stack_lst_node *top_node,
 		else if (nm_stack == 'b')
 		{
 			if (top_node->before_middle)
-			{
-				retate(stack);
-				write(1, "rb\n", 3);
-			}
+				retate_b(stack);
 			else
 			{
 				reverse_retate(stack);
@@ -63,4 +68,13 @@ void	final_steps(t_stack_lst_node **stack, t_stack_lst_node *top_node,
 			}
 		}
 	}
+}
+
+void	refresh_nodes(t_stack_lst_node *a, t_stack_lst_node *b)
+{
+	get_update_pos(a);
+	get_update_pos(b);
+	get_place_to_move(a, b);
+	set_moves(a, b);
+	get_small_num_moves(b);
 }

@@ -6,7 +6,7 @@
 /*   By: sel-moud <sel-moud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 02:43:14 by sel-moud          #+#    #+#             */
-/*   Updated: 2024/05/07 02:43:15 by sel-moud         ###   ########.fr       */
+/*   Updated: 2024/05/09 00:38:41 by sel-moud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,14 @@ bool	is_sorted(t_stack_lst_node *list)
 		list = list->next;
 	}
 	return (true);
+}
+
+void	loop_stack_rev_retate(t_stack_lst_node **stack_a,
+		t_stack_lst_node *small_node)
+{
+	while (*stack_a != small_node)
+	{
+		reverse_retate(stack_a);
+		write(1, "rra\n", 4);
+	}
 }

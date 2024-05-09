@@ -6,7 +6,7 @@
 /*   By: sel-moud <sel-moud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 02:43:10 by sel-moud          #+#    #+#             */
-/*   Updated: 2024/05/08 00:49:01 by sel-moud         ###   ########.fr       */
+/*   Updated: 2024/05/09 00:49:27 by sel-moud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,15 @@ void	free_array(char **str)
 	i = 0;
 	while (str[i] != NULL)
 	{
-		free(str[i]);
+		if (str[i])
+			free(str[i]);
 		i++;
 	}
 	if (str)
 		free(str);
 }
 
-void	clean_mmr(t_stack_lst_node **a, char **av, int ac)
+void	clean_mmr(t_stack_lst_node **a, char **av)
 {
 	stack_freeing(a);
 	if (av)

@@ -6,7 +6,7 @@
 /*   By: sel-moud <sel-moud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 02:43:23 by sel-moud          #+#    #+#             */
-/*   Updated: 2024/05/07 03:37:50 by sel-moud         ###   ########.fr       */
+/*   Updated: 2024/05/09 00:12:41 by sel-moud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,9 +95,9 @@ t_stack_lst_node	*get_small_number(t_stack_lst_node *stack)
 
 void	get_place_to_move(t_stack_lst_node *a, t_stack_lst_node *b)
 {
-	t_stack_lst_node *current_a;
-	t_stack_lst_node *target_node;
-	long best_match_index;
+	t_stack_lst_node	*current_a;
+	t_stack_lst_node	*target_node;
+	long				best_match_index;
 
 	while (b)
 	{

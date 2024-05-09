@@ -25,6 +25,7 @@ $(ARCH): $(OBJS)
 
 clean:
 		$(RM) $(OBJS)
+		$(RM) $(ARCH)
 
 fclean: clean
 		$(RM) $(NAME)

@@ -6,43 +6,45 @@
 /*   By: sel-moud <sel-moud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 02:43:17 by sel-moud          #+#    #+#             */
-/*   Updated: 2024/05/07 20:38:47 by sel-moud         ###   ########.fr       */
+/*   Updated: 2024/05/09 00:36:24 by sel-moud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+static void	retate_a_b(t_stack_lst_node **a, t_stack_lst_node **b)
+{
+	retate(a);
+	retate(b);
+	write(1, "rr\n", 3);
+}
+
+static void	reverse_retate_a_b(t_stack_lst_node **a, t_stack_lst_node **b)
+{
+	reverse_retate(a);
+	reverse_retate(b);
+	write(1, "rrr\n", 4);
+}
 
 void	move_nodes(t_stack_lst_node **a, t_stack_lst_node **b)
 {
 	t_stack_lst_node	*node_to_move;
 
 	node_to_move = get_smallest_moves_nd(*b);
-	//	printf("smaalest:%d\n",node_to_move->value);
 	if (node_to_move->before_middle && node_to_move->place_node->before_middle)
 	{
-		// printf("hh\n");
 		while (*a != node_to_move->place_node && *b != node_to_move)
-		{
-			retate(a);
-			retate(b);
-			write(1, "rr\n", 3);
-		}
+			retate_a_b(a, b);
 		get_update_pos(*a);
 		get_update_pos(*b);
 	}
 	else if (!(node_to_move->before_middle)
 		&& !(node_to_move->place_node->before_middle))
 	{
-		// printf("ff\n");
 		while (*a != node_to_move->place_node && *b != node_to_move)
-		{
-			reverse_retate(a);
-			reverse_retate(b);
-			write(1, "rrr\n", 4);
-		}
+			reverse_retate_a_b(a, b);
 		get_update_pos(*a);
 		get_update_pos(*b);
-		// write(1,"rrr\n",4);
 	}
 	final_steps(b, node_to_move, 'b');
 	final_steps(a, node_to_move->place_node, 'a');
@@ -50,14 +52,14 @@ void	move_nodes(t_stack_lst_node **a, t_stack_lst_node **b)
 	write(1, "pa\n", 3);
 }
 
-
-void	refresh_nodes(t_stack_lst_node *a, t_stack_lst_node *b)
+static void	loop_stack_retete(t_stack_lst_node **stack_a,
+		t_stack_lst_node *small_node)
 {
-	get_update_pos(a);
-	get_update_pos(b);
-	get_place_to_move(a, b);
-	set_moves(a, b);
-	get_small_num_moves(b);
+	while (*stack_a != small_node)
+	{
+		retate(stack_a);
+		write(1, "ra\n", 3);
+	}
 }
 
 void	push_swap(t_stack_lst_node **stack_a, t_stack_lst_node **stack_b)
@@ -73,79 +75,15 @@ void	push_swap(t_stack_lst_node **stack_a, t_stack_lst_node **stack_b)
 		i--;
 	}
 	sort_three(stack_a);
-	// printf("ll\n");
 	while (*stack_b != NULL)
 	{
 		refresh_nodes(*stack_a, *stack_b);
 		move_nodes(stack_a, stack_b);
 	}
-	// printf("uu\n");
 	get_update_pos(*stack_a);
 	small_node = get_small_number(*stack_a);
 	if (small_node->before_middle)
-	{
-		while (*stack_a != small_node)
-		{
-			retate(stack_a);
-			write(1, "ra\n", 3);
-		}
-	}
+		loop_stack_retete(stack_a, small_node);
 	else
-	{
-		while (*stack_a != small_node)
-		{
-			reverse_retate(stack_a);
-			write(1, "rra\n", 4);
-		}
-	}
+		loop_stack_rev_retate(stack_a, small_node);
 }
-
-/*
-int	main(int argc,char **argv)
-{
-	t_stack_lst_node	*a;
-		t_stack_lst_node *b;
-	t_stack_lst_node	*d;
-
-	a = NULL;
-		b = NULL;
-	if (1 == argc || (2 == argc && !argv[1][0]))
-				return (1);
-		else if (2 == argc)
-					argv = ft_split(argv[1], ' ');
-			stack_init(&a, argv + 1);
-	push_swap(&a,&b);
-	add_element(&a,8);
-		add_element(&a,7);
-   add_element(&a,2);
-		add_element(&a,11);
-				add_element(&a,6);
-				add_element(&a,5);
-				add_element(&a,100);
-				add_element(&a,20);
-   //stack_init(&a, argv + 1, 2 == argc);
-  push_swap(&a,&b);
- while(a!= NULL)
-	{
-		printf("value :%d, pos: %d ,moves: %d,
-			before_middle :%d\n",a->value,a->pos,a->moves, a->before_middle);
-		// if(f1->prev !=NULL)
-		// {
-		//     printf("%d\n",f1->prev->value);
-		// }else
-		//     printf("\n");
-		a = a->next;
-	}
-printf("*****\n");
- while(b != NULL)
-	{
-		printf("value :%d, pos: %d ,moves: %d, before_middle :%d,plmpos :%d,
-			small:%d\n",b->value,b->pos,b->moves, b->before_middle,
-			b->place_node->pos, b->small_n_moves);
-		b = b->next;
-	}
-		printf("*****\n");
-		d = get_smallest_moves_nd(b);
-		printf("%d\n",d->value);
-}
-*/
